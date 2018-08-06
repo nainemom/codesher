@@ -7,19 +7,18 @@ import VueRouter from 'vue-router'
 // import './favicon.ico'
 // import './CNAME.none'
 import main from './main.vue'
-
+import routes from './routes/dynamic.js'
 // Framevuerk.use('hammer', Hammer)
 Vue.use(VueRouter)
 // Vue.use(VueHighlightJS)
 // Vue.use(Framevuerk)
-
 // Routes
-const routes = require('./routes.js')('app')
+console.log(routes)
+
 const router = new VueRouter({
-  mode: process.env.NODE_ENV === 'production' ? 'history' : '',
+  mode: 'history',
   routes
 })
-
 new Vue({
   data() {
     return {

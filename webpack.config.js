@@ -6,19 +6,15 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var path = require('path')
 var fs = require('fs')
 
-function allPosts() {
-  var dir = path.resolve(__dirname, './posts')
-  var posts = fs.readdirSync(dir)
-  var ret = {}
-  for (var i = 0; i < posts.length; i++) {
-    ret[posts[i]] = JSON.parse(fs.readFileSync(dir + '/' + posts[i]))
-  }
-  return ret
-}
 
-var posts = allPosts()
 
-var routes = require('./src/routes.js')('config', posts)
+var posts = 'salam'
+
+
+
+var routes = require('./src/routes/static.js')
+
+console.log(routes)
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
@@ -74,7 +70,7 @@ function generateConfig() {
       libraryTarget: 'umd'
     },
     devServer: {
-      contentBase: path.join(__dirname, "dist"),
+      contentBase: path.join(__dirname, "./public"),
       compress: false,
       port: 8080,
       host: "0.0.0.0",
@@ -128,9 +124,12 @@ function generateConfig() {
       new PrerenderSpaPlugin({
         routes: routes.map(route => route.path),
         staticDir: path.resolve(__dirname, './public'),
+        renderAfterDocumentEvent: 'render-done',
         renderer: new Renderer({
           injectProperty: '__PRERENDER_INJECTED',
-          inject: 'sss'
+          inject: {
+            x: 'salam'
+          }
         })
       })
     ]

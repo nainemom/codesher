@@ -1,4 +1,5 @@
 {
   "packageName": "codesher",
+  "perPage": 10,
   "title": "کدشعر"
 }
