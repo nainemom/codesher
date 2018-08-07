@@ -25,15 +25,13 @@ function generateConfig() {
     ret.push({
       loader: 'css-loader'
     })
-    ret.push({
-      loader: 'postcss-loader'
-    })
+    // ret.push({
+    //   loader: 'postcss-loader'
+    // })
 
     let sassLoaderData = ''
-    Object.keys(config).forEach(key => {
-      if (typeof config[key] === 'string' && config[key].indexOf('/') === -1 && config[key].indexOf('\\') === -1) {
-        sassLoaderData += `$${key}: ${config[key]};`
-      }
+    Object.keys(config.scssVars).forEach(key => {
+      sassLoaderData += `$${key}: ${config.scssVars[key]};`
     })
     ret.push({
       loader: 'sass-loader',
