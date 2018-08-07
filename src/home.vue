@@ -7,7 +7,7 @@ export default {
   components: {},
   data() {
     return {
-      salam: "salam"
+      salam: "salam Home PAGEEEEE"
     };
   }
 };

@@ -1,41 +1,42 @@
+import config from '../../config.json'
 import list from '../list.vue'
 import single from '../single.vue'
+import home from '../home.vue'
 
-export default [
-  {
-    path: '/',
-    component: list
-  },
-  {
-    path: '/page/:page',
-    component: list
-  },
-  {
-    path: '/posts',
-    component: list
-  },
-  {
-    path: '/posts/page/:page',
-    component: list
-  },
-  {
-    path: '/posts/:post',
-    component: single
-  },
-  {
-    path: '/authors/:author',
-    component: list
-  },
-  {
-    path: '/authors/:author/page/:page',
-    component: list
-  },
-  {
-    path: '/tags/:tag',
-    component: list
-  },
-  {
-    path: '/tags/:tag/page/:page',
-    component: list
-  }
-]
+const paginated = (route, component) => {
+  return [
+    {
+      path: route,
+      component
+    },
+    {
+      path: `${route === '/' ? '' : route}/page/:page`,
+      component
+    }
+  ]
+}
+
+let ret = []
+
+
+ret.push({
+  path: '/',
+  component: home
+})
+
+ret = ret.concat(paginated('/posts', list))
+ret.push({
+  path: '/posts/:post',
+  component: single
+})
+
+console.log(config.categories)
+config.categories.forEach(category => {
+  console.log(category)
+  ret = ret.concat(paginated(`/${category}/:${category}`, list))
+})
+
+console.log('dynamic ones')
+console.log(ret)
+
+export default ret

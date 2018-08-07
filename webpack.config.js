@@ -8,13 +8,10 @@ var fs = require('fs')
 
 
 
-var posts = 'salam'
-
-
+const posts = require('./utils/allPosts.js')
 
 var routes = require('./src/routes/static.js')
 
-// console.log(routes)
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
@@ -122,13 +119,13 @@ function generateConfig() {
         template: path.resolve(__dirname, './src/index.html')
       }),
       new PrerenderSpaPlugin({
-        routes: routes.map(route => route.path),
+        routes,
         staticDir: path.resolve(__dirname, './public'),
         renderAfterDocumentEvent: 'render-done',
         renderer: new Renderer({
           injectProperty: '__PRERENDER_INJECTED',
           inject: {
-            routes,
+            posts,
             config
           }
         })

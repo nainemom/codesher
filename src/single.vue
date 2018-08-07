@@ -1,5 +1,5 @@
 <template>
-  <div> Salam Single {{$route.path}} <br> {{post}}</div>
+  <div> <h2>Single</h2> <p> {{post}} </p></div>
 </template>
 
 <script>
@@ -10,11 +10,10 @@ export default {
       post: "salam"
     };
   },
-  mounted() {},
   created() {
     if (window.__PRERENDER_INJECTED) {
-      this.post = window.__PRERENDER_INJECTED.routes.find(
-        post => post.path === this.$route.path
+      this.post = window.__PRERENDER_INJECTED.posts.find(
+        post => post.name === this.$route.params.post
       ).data;
       document.dispatchEvent(new Event("render-done"));
     }

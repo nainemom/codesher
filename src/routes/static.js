@@ -1,73 +1,42 @@
-const fs = require('fs')
-const path = require('path')
+const config = require('../../config.json')
+const posts = require('../../utils/allPosts.js')
+let ret = []
 
-const urlName = (filename) => {
-  return filename.split('.')[0]
-}
+const paginated = (route, categoryName = null, categoryValue = null) => {
+  const ret = []
+  ret.push(`${route}${categoryValue ? `/${categoryValue}` : ''}`)
+  let dataLength
+  if (categoryName && categoryValue) {
+    dataLength = posts.filter(post => {
+      return post.data[categoryName].indexOf(categoryValue) > -1
+    }).length
+  } else {
+    dataLength = posts.length
+  }
 
-function allPosts() {
-  var dir = path.resolve(__dirname, '../../posts')
-  var posts = fs.readdirSync(dir)
-  var ret = []
-  for (var i = 0; i < posts.length; i++) {
-    ret.push({
-      path: '/posts/' + urlName(posts[i]),
-      data: JSON.parse(fs.readFileSync(dir + '/' + posts[i]))
-    })
+  const pages = Math.ceil(dataLength / config.perPage)
+  for (let i = 2; i <= pages; i++) {
+    ret.push(`${route === '/' ? '' : route}${categoryValue ? `/${categoryValue}` : ''}/page/${i}`)
   }
   return ret
 }
-const posts = allPosts()
-const ret = []
 
-
-
-
-
-ret.push({
-  path: '/',
-  data: []
-})
-
-const authors = []
-const tags = []
-
+ret.push('/')
+ret = ret.concat(paginated('/posts'))
 posts.forEach(post => {
-  ret.push({
-    path: post.path,
-    data: post.data
-  })
-
-  post.data.authors.forEach(author => {
-    if (authors.indexOf(author) === -1) {
-      authors.push(author)
-    }
-  })
-  post.data.tags.forEach(tag => {
-    if (tags.indexOf(tag) === -1) {
-      tags.push(tag)
-    }
-  })
-
+  ret.push('/posts/' + post.name)
 })
 
 
-authors.forEach(author => {
-  ret.push({
-    path: '/authors/' + author,
-    data: posts.filter(post => {
-      console.log(post.data.authors.indexOf(author))
-      return post.data.authors.indexOf(author) !== -1
-    })
+config.categories.forEach(categoryName => {
+  const uniqueCategoryValues = [].concat(...posts.map(post => post.data[categoryName])).filter((cat, index, self) => self.indexOf(cat) === index)
+  uniqueCategoryValues.forEach(categoryValue => {
+    ret = ret.concat(paginated('/' + categoryName, categoryName, categoryValue))
   })
 })
 
-// tags.forEach(tag => {
-//   ret.push({
-//     path: 'tags/' + tag,
-//     data: posts.filter(post => post.data.tags.indexof(tag) !== -1)
-//   })
-// })
+console.log('static ones')
+console.log(ret)
 
 module.exports = ret
 

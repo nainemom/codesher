@@ -1,5 +1,9 @@
 {
   "packageName": "codesher",
-  "perPage": 1,
-  "title": "کدشعر"
+  "perPage": 2,
+  "title": "کدشعر",
+  "categories": [
+    "authors",
+    "tags"
+  ]
 }
