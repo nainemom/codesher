@@ -5,5 +5,8 @@
   "categories": [
     "authors",
     "tags"
-  ]
+  ],
+  "scssVars": {
+    "color": "#2391ca"
+  }
 }
