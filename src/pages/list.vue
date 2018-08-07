@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="list">
     <h2>List</h2>
     {{posts}}
     <br>
@@ -42,3 +42,8 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.list {
+  color: $color;
+}
+</style>
