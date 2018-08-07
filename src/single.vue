@@ -1,5 +1,5 @@
 <template>
-  <div> {{post}} </div>
+  <div> Salam Single {{$route.path}} <br> {{post}}</div>
 </template>
 
 <script>
@@ -7,15 +7,17 @@ export default {
   components: {},
   data() {
     return {
-      post: null
+      post: "salam"
     };
   },
-  async mounted() {
-    console.log(this.$route)
-    this.post = this.$route
-    this.$nextTick(() => {
-      document.dispatchEvent(new Event('render-done'))
-    })
+  mounted() {},
+  created() {
+    if (window.__PRERENDER_INJECTED) {
+      this.post = window.__PRERENDER_INJECTED.routes.find(
+        post => post.path === this.$route.path
+      ).data;
+      document.dispatchEvent(new Event("render-done"));
+    }
   }
-}
+};
 </script>
