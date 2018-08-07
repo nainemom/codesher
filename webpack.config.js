@@ -14,7 +14,7 @@ var posts = 'salam'
 
 var routes = require('./src/routes/static.js')
 
-console.log(routes)
+// console.log(routes)
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
@@ -128,7 +128,8 @@ function generateConfig() {
         renderer: new Renderer({
           injectProperty: '__PRERENDER_INJECTED',
           inject: {
-            x: 'salam'
+            routes,
+            config
           }
         })
       })
