@@ -19,21 +19,24 @@ const router = new VueRouter({
   mode: 'history',
   routes
 })
-new Vue({
-  data() {
-    return {
 
-    }
-  },
-  router,
-  methods: {
+document.addEventListener('DOMContentLoaded', function () {
+  new Vue({
+    data() {
+      return {
 
-  },
-  created() {
+      }
+    },
+    router,
+    methods: {
 
-  },
-  watch: {
+    },
+    created() {
 
-  },
-  render: h => h(main)
-}).$mount('#app')
+    },
+    watch: {
+
+    },
+    render: h => h(main)
+  }).$mount('#app')
+})

@@ -1,23 +1,26 @@
 const fs = require('fs')
 const path = require('path')
 
+const urlName = (filename) => {
+  return filename.split('.')[0]
+}
+
 function allPosts() {
   var dir = path.resolve(__dirname, '../../posts')
   var posts = fs.readdirSync(dir)
-  var ret = {}
+  var ret = []
   for (var i = 0; i < posts.length; i++) {
-    if (posts[i].indexOf('_') === -1) {
-      ret[posts[i]] = JSON.parse(fs.readFileSync(dir + '/' + posts[i]))
-    }
+    ret.push({
+      path: '/posts/' + urlName(posts[i]),
+      data: JSON.parse(fs.readFileSync(dir + '/' + posts[i]))
+    })
   }
   return ret
 }
 const posts = allPosts()
 const ret = []
 
-const urlName = (filename) => {
-  return filename.split('.')[0]
-}
+
 
 
 
@@ -26,12 +29,45 @@ ret.push({
   data: []
 })
 
-Object.keys(posts).forEach(file => {
+const authors = []
+const tags = []
+
+posts.forEach(post => {
   ret.push({
-    path: '/posts/' + urlName(file),
-    data: posts[file]
+    path: post.path,
+    data: post.data
+  })
+
+  post.data.authors.forEach(author => {
+    if (authors.indexOf(author) === -1) {
+      authors.push(author)
+    }
+  })
+  post.data.tags.forEach(tag => {
+    if (tags.indexOf(tag) === -1) {
+      tags.push(tag)
+    }
+  })
+
+})
+
+
+authors.forEach(author => {
+  ret.push({
+    path: '/authors/' + author,
+    data: posts.filter(post => {
+      console.log(post.data.authors.indexOf(author))
+      return post.data.authors.indexOf(author) !== -1
+    })
   })
 })
+
+// tags.forEach(tag => {
+//   ret.push({
+//     path: 'tags/' + tag,
+//     data: posts.filter(post => post.data.tags.indexof(tag) !== -1)
+//   })
+// })
 
 module.exports = ret
 

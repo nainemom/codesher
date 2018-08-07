@@ -7,7 +7,7 @@ export default [
     component: list
   },
   {
-    path: 'page/:page',
+    path: '/page/:page',
     component: list
   },
   {
@@ -23,19 +23,19 @@ export default [
     component: single
   },
   {
-    path: 'authors/:author',
+    path: '/authors/:author',
     component: list
   },
   {
-    path: 'authors/:author/page/:page',
+    path: '/authors/:author/page/:page',
     component: list
   },
   {
-    path: 'tags/:tag',
+    path: '/tags/:tag',
     component: list
   },
   {
-    path: 'tags/:tag/page/:page',
+    path: '/tags/:tag/page/:page',
     component: list
   }
 ]
