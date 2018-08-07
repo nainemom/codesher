@@ -1,7 +1,7 @@
 import config from '../../config.json'
-import list from '../list.vue'
-import single from '../single.vue'
-import home from '../home.vue'
+import list from '../pages/list.vue'
+import single from '../pages/single.vue'
+import home from '../pages/home.vue'
 
 const paginated = (route, component) => {
   return [
@@ -30,13 +30,6 @@ ret.push({
   component: single
 })
 
-console.log(config.categories)
-config.categories.forEach(category => {
-  console.log(category)
-  ret = ret.concat(paginated(`/${category}/:${category}`, list))
-})
-
-console.log('dynamic ones')
-console.log(ret)
+ret = ret.concat(paginated(`/:categoryName/:categoryValue`, list))
 
 export default ret

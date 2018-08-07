@@ -35,17 +35,4 @@ config.categories.forEach(categoryName => {
   })
 })
 
-console.log('static ones')
-console.log(ret)
-
 module.exports = ret
-
-//
-// /                                sher page 1 (and home page)
-// /page/:page                      sher other pages
-// /author/:author                  author sher page
-// /author/:author/page/:page       author sher other pages
-// /tag/:tag                        tag sher other pages
-// /tag/:tag/page/:page             tag sher other pages
-// /posts/:post_id                  single
-//
