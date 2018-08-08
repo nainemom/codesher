@@ -18,7 +18,7 @@
 }
 
 html > body {
-  font-size: 14px;
+  font-size: 16px;
   direction: rtl;
   text-align: right;
   background: $background;
@@ -27,6 +27,7 @@ html > body {
 }
 h1, h2, h3, h4, h5 {
   font-family: 'Lalezar';
+  font-weight: normal;
 }
 
 .app-link {
@@ -34,7 +35,8 @@ h1, h2, h3, h4, h5 {
   transition-property: color, text-shadow;
   transition-duration: 0.2s;
 
-  &:hover {
+  &:hover,
+  &.hover {
     color: $theme-color;
     text-shadow: 0 0 2px contarst($theme-color, 2, force-dark);
   }
