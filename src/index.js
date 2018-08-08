@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import main from './main.vue'
 import routes from './routes/dynamic.js'
+import './style.scss'
 
 Vue.use(VueRouter)
 
