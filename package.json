@@ -4,21 +4,22 @@
   "description": "codesher blog source",
   "main": "src/index.js",
   "dependencies": {
-    "babel-preset-env": "^1.7.0",
+    "@octokit/rest": "^15.9.5",
+    "markdown": "^0.5.0",
     "vue": "^2.5.17",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "idate": "^0.1.5"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
-    "blueimp-md5": "^2.10.0",
+    "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
-    "idate": "^0.1.5",
     "node-sass": "^4.9.2",
+    "offline-plugin": "^5.0.5",
     "postcss-loader": "^2.1.6",
-    "prerender-spa-plugin": "^3.2.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.21.0",
     "vue-loader": "^14.2.3",
@@ -29,6 +30,7 @@
   },
   "scripts": {
     "build": "webpack --mode=production",
+    "dev": "webpack-dev-server --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
