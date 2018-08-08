@@ -8,19 +8,14 @@
 </template>
 
 <script>
+import { getConfig } from "../utils/index.js";
+
 export default {
   data() {
     return {
-      title: "",
-      description: ""
+      title: getConfig().title,
+      description: getConfig().description
     };
-  },
-  created() {
-    const prerender = require("../../utils/prerender.js");
-    if (prerender.hasAccess()) {
-      this.title = prerender.getConfig().title;
-      this.description = prerender.getConfig().description;
-    }
   }
 };
 </script>
@@ -31,7 +26,7 @@ header {
   color: $color;
 
   & > .title {
-    padding: 25px;
+    padding: 25px 15px;
     display: block;
     height: auto;
     overflow: auto;

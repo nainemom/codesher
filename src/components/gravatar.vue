@@ -1,7 +1,7 @@
 <template>
-  <router-link class="app-link user" :to="'/authors/' + user.email" target="_self">
-    <img :src="user.image + '?s=28'"/>
-    <span> {{user.name}} </span>
+  <router-link v-if="user" class="app-link user" :to="'/posts?user=' + user.login + '&page=1'" target="_self">
+    <img :src="avatar" :alt="user.login"/>
+    <span> {{user.login}} </span>
   </router-link>
 </template>
 
@@ -12,6 +12,15 @@ export default {
       type: Object,
       required: true
     }
+  },
+  computed: {
+    avatar() {
+      let seperator = "?";
+      if (this.user.avatar_url.indexOf("?") > -1) {
+        seperator = "&";
+      }
+      return this.user.avatar_url + seperator + `s=28`;
+    }
   }
 };
 </script>
@@ -19,15 +28,25 @@ export default {
 @import "../styles/functions";
 
 .user {
+  padding: 0 5px;
   display: inline-block;
+
   & > img {
+    margin-left: 2px;
     border-radius: 14px;
     overflow: hidden;
     vertical-align: middle;
+    transition: transform 0.7s;
   }
+
   & > span {
-    padding: 4px;
     font-weight: bold;
+  }
+
+  &:hover {
+    & > img {
+      transform: rotate(360deg);
+    }
   }
 }
 </style>

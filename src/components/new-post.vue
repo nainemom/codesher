@@ -13,7 +13,7 @@ div {
   padding: 15px;
   background: contrast($background, 1, force-light);
   border: dashed 2px contrast($background, 2);
-  margin: 15px;
+  margin: 15px 0;
   position: sticky;
   top: 15px;
   text-align: center;

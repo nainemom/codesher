@@ -7,6 +7,10 @@
 <style lang="scss" scoped>
 @import "../styles/functions";
 
+div {
+  padding: 15px;
+}
+
 @media (min-width: 768px) {
   div {
     width: 768px;

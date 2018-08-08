@@ -1,38 +1,52 @@
 <template>
   <div>
-    <app-header></app-header>
-    <h2>Single</h2>
-    <div> {{post}} </div>
-    <div>
-      <h3>
-        <router-link :to="'/posts/'+post.name" target="_self"> {{post.data.title}} </router-link>
-      </h3>
-      <h4 v-for="author in post.data.authors" :key="'author' + author">
-        <router-link :to="'/authors/' + author" target="_self"> {{author}} </router-link>
-      </h4>
-      <p> {{post.data.content}} </p>
-    </div>
+    <AppHeader></AppHeader>
+    <AppContent>
+      <AppNewPost></AppNewPost>
+      <AppPost :post="post"></AppPost>
+    </AppContent>
   </div>
 </template>
-
 <script>
+import Octokit from "@octokit/rest";
 import AppHeader from "../components/header.vue";
+import AppContent from "../components/content.vue";
+import AppPost from "../components/post.vue";
+import AppNewPost from "../components/new-post.vue";
 
 export default {
   components: {
-    AppHeader
+    AppHeader,
+    AppContent,
+    AppPost,
+    AppNewPost
   },
   data() {
     return {
       post: {}
     };
   },
-  mounted() {
-    const prerender = require("../../utils/prerender.js");
-    if (prerender.hasAccess()) {
-      this.post = prerender.getPostByName(this.$route.params.post);
-      prerender.done();
+  async created() {
+    await this.fetch();
+  },
+  methods: {
+    async fetch() {
+      const octokit = new Octokit();
+      const result = await octokit.issues.get({
+        owner: "codesher-blog",
+        repo: "src",
+        number: this.$route.params.post
+        /*, milestone, state, assignee, creator, mentioned, labels, sort, direction, since, per_page, page*/
+      });
+      this.post = result.data;
+    }
+  },
+  watch: {
+    "$route.params"() {
+      this.fetch();
     }
   }
 };
 </script>
+<style lang="scss" scoped>
+</style>
