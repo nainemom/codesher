@@ -1,0 +1,58 @@
+<template>
+  <header>
+    <div class="title">
+      <h2><router-link class="app-link" to="/posts" target="_self"> {{title}} </router-link></h2>
+      <p>{{description}}</p>
+    </div>
+  </header>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      title: "",
+      description: ""
+    };
+  },
+  created() {
+    const prerender = require("../../utils/prerender.js");
+    if (prerender.hasAccess()) {
+      this.title = prerender.getConfig().title;
+      this.description = prerender.getConfig().description;
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+@import "../styles/functions";
+
+header {
+  color: $color;
+
+  & > .title {
+    padding: 25px;
+    display: block;
+    height: auto;
+    overflow: auto;
+
+    & > h2 {
+      font-size: 3em;
+      font-weight: bold;
+    }
+
+    @media (min-width: 768px) {
+      width: 768px;
+      margin: 0 auto;
+    }
+  }
+
+  & > .links {
+    padding: 15px;
+    background: contrast($background, 1, force-light);
+    border-top: solid 1px contrast($background, 2);
+    border-bottom: solid 1px contrast($background, 2);
+  }
+}
+</style>
+
