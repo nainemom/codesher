@@ -1,12 +1,19 @@
 <template>
-  <div> <h2>Post Creator App</h2></div>
+  <div>
+    <app-header></app-header>
+    <h2>Post Creator App</h2>
+  </div>
 </template>
 
 <script>
+import AppHeader from "../components/header.vue";
+
 export default {
-  components: {},
+  components: {
+    AppHeader
+  },
   data() {},
-  created() {
+  mounted() {
     const prerender = require("../../utils/prerender.js");
     if (prerender.hasAccess()) {
       prerender.done();
