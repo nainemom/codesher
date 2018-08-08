@@ -12,6 +12,10 @@ export function getPostByName(name) {
   )
 }
 
+export function getConfig() {
+  return window.__PRERENDER_INJECTED.config
+}
+
 export function getPostsByCategory() {
   const categoryName = arguments.length >= 2 ? arguments[0] : null
   const categoryValue = arguments.length >= 2 ? arguments[1] : null
