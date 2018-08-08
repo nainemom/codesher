@@ -1,7 +1,7 @@
-import config from '../../config.json'
-import list from '../pages/list.vue'
-import single from '../pages/single.vue'
-import home from '../pages/home.vue'
+import ListPage from '../pages/list.vue'
+import SinglePage from '../pages/single.vue'
+import HomePage from '../pages/home.vue'
+import NewPage from '../pages/new.vue'
 
 const paginated = (route, component) => {
   return [
@@ -21,15 +21,19 @@ let ret = []
 
 ret.push({
   path: '/',
-  component: home
+  component: HomePage
 })
 
-ret = ret.concat(paginated('/posts', list))
+ret = ret.concat(paginated('/posts', ListPage))
 ret.push({
   path: '/posts/:post',
-  component: single
+  component: SinglePage
+})
+ret.push({
+  path: '/new',
+  component: NewPage
 })
 
-ret = ret.concat(paginated(`/:categoryName/:categoryValue`, list))
+ret = ret.concat(paginated(`/:categoryName/:categoryValue`, ListPage))
 
 export default ret

@@ -22,6 +22,7 @@ const paginated = (route, categoryName = null, categoryValue = null) => {
 }
 
 ret.push('/')
+ret.push('/new')
 ret = ret.concat(paginated('/posts'))
 posts.forEach(post => {
   ret.push('/posts/' + post.name)
