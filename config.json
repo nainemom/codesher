@@ -3,6 +3,7 @@
   "perPage": 4,
   "title": "کدشعر",
   "description": "مکانی برای به اشتراک‌گذاری کدشعرهای شما",
+  "repoUrl": "https://github.com/codesher-blog/src",
   "categories": [
     "authors",
     "tags"
