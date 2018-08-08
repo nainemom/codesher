@@ -1,20 +1,10 @@
 var config = require('./config.json')
 var webpack = require('webpack')
-var PrerenderSpaPlugin = require('prerender-spa-plugin')
-const Renderer = PrerenderSpaPlugin.PuppeteerRenderer
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var path = require('path')
-var fs = require('fs')
-
-
-
-const posts = require('./utils/allPosts.js')
-
-var routes = require('./src/routes/static.js')
-
+var OfflinePlugin = require('offline-plugin')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-
 
 function generateConfig() {
   function styleLoader() {
@@ -45,10 +35,7 @@ function generateConfig() {
 
   function jsLoader() {
     return {
-      loader: 'babel-loader',
-      options: {
-        presets: ['env']
-      }
+      loader: 'babel-loader'
     }
   }
   function fileLoader() {
@@ -108,26 +95,14 @@ function generateConfig() {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env.config': JSON.stringify(config),
-        'process.env.posts': JSON.stringify(posts) //
+        'process.env.config': JSON.stringify(config)
       }),
       new HtmlWebpackPlugin({
         title: 'Code Sher',
         filename: path.resolve(__dirname, './public/index.html'),
         template: path.resolve(__dirname, './src/index.html')
       }),
-      new PrerenderSpaPlugin({
-        routes,
-        staticDir: path.resolve(__dirname, './public'),
-        renderAfterDocumentEvent: 'render-done',
-        renderer: new Renderer({
-          injectProperty: '__PRERENDER_INJECTED',
-          inject: {
-            posts,
-            config
-          }
-        })
-      })
+      new OfflinePlugin()
     ]
   }
 }
