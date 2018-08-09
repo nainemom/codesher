@@ -24,11 +24,12 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 @import "../styles/functions";
 
 .user {
-  padding: 0 5px;
+  padding: 5px 0;
   display: inline-block;
 
   & > img {
