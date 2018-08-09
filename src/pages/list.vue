@@ -4,27 +4,25 @@
     <AppContent>
       <AppNewPost></AppNewPost>
       <AppPost v-for="post in posts" :key="'post' + post.id" :post="post"></AppPost>
+      <AppPaginate :prev="hasPrev ? {query: {page: page - 1}} : false" :next="hasNext ? {query: {page: page + 1}} : false" :page="page"></AppPaginate>
     </AppContent>
-    <div>
-      <router-link v-if="hasPrev" :to="{query: {page: page - 1}}" target="_self"> Prev Page </router-link>
-      <router-link v-if="hasNext" :to="{query: {page: page + 1}}" target="_self"> Next Page </router-link>
-    </div>
   </div>
 </template>
 <script>
-import { getConfig } from "../utils/index.js";
-import Octokit from "@octokit/rest";
+import { getAll } from "../utils/github.js";
 import AppHeader from "../components/header.vue";
 import AppContent from "../components/content.vue";
 import AppPost from "../components/post.vue";
 import AppNewPost from "../components/new-post.vue";
+import AppPaginate from "../components/paginate.vue";
 
 export default {
   components: {
     AppHeader,
     AppContent,
     AppPost,
-    AppNewPost
+    AppNewPost,
+    AppPaginate
   },
   data() {
     return {
@@ -43,18 +41,21 @@ export default {
   },
   methods: {
     async fetch() {
-      const octokit = new Octokit();
-      const result = await octokit.issues.getForRepo({
-        owner: "codesher-blog",
-        repo: "src",
-        labels: "codesher",
-        per_page: getConfig().perPage,
-        page: this.page
-        /*, milestone, state, assignee, creator, mentioned, labels, sort, direction, since, per_page, page*/
-      });
-      this.hasNext = octokit.hasNextPage(result);
-      this.hasPrev = this.page > 1;
-      this.posts = result.data;
+      this.$loading.start();
+      try {
+        const response = await getAll({
+          page: this.$route.query.page || undefined,
+          user: this.$route.query.user || undefined
+        });
+        this.hasNext = response.hasNext;
+        this.hasPrev = response.hasPrev;
+        this.posts = response.result;
+        this.$loading.finish();
+      } catch (e) {
+        this.hasNext = false;
+        this.hasPrev = false;
+        this.$loading.finish();
+      }
     }
   },
   watch: {
