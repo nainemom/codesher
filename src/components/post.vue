@@ -4,11 +4,13 @@
       <h2>
         <router-link class="app-link" :to="'/posts/'+post.number" target="_self"> {{post.title}} </router-link>
       </h2>
+    </div>
+    <p class="body" v-html="body"></p>
+    <div class="description">
       <small>
         سروده شده توسط <app-gravatar :user="post.user"></app-gravatar> در تاریخ {{date}}
       </small>
     </div>
-    <p class="body" v-html="body"></p>
   </div>
 </template>
 
@@ -49,19 +51,23 @@ export default {
   background: contrast($background, 1, force-light);
   border: solid 1px contrast($background, 2);
   margin: 15px 0;
+  width: 100%;
 
   & > .title {
-    padding: 15px;
     line-height: 3em;
+    padding: 15px;
 
     & > h2 {
       font-size: 2.5em;
     }
   }
   & > .body {
-    padding: 15px;
+    padding: 20px 15px;
     font-size: 1.2em;
     line-height: 2em;
+  }
+  & > .description {
+    padding: 15px 0 0 0;
   }
 }
 </style>
