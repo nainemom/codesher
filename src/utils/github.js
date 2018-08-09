@@ -57,6 +57,5 @@ export async function get({ number }) {
     repo: "src",
     number
   })
-  console.log(response.data)
   return response.data
 }
