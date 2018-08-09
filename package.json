@@ -35,6 +35,7 @@
     "build": "webpack --mode=production",
     "dev": "webpack-dev-server --mode=development",
     "clean": "rimraf public",
+    "publish": "./publish.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
