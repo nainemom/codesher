@@ -1,6 +1,6 @@
 {
   "packageName": "codesher",
-  "perPage": 4,
+  "perPage": 10,
   "title": "کدشعر",
   "description": "مکانی برای به اشتراک‌گذاری کدشعرهای شما",
   "repoUrl": "https://github.com/codesher-blog/src",
@@ -8,18 +8,8 @@
     "authors",
     "tags"
   ],
-  "headerLinks": [
-    {
-      "route": "/posts",
-      "text": "شعر‌ها"
-    },
-    {
-      "route": "/new",
-      "text": "منم می‌خوام!"
-    }
-  ],
   "scssVars": {
-    "theme-color": "#f79f9f",
+    "theme-color": "#da3434",
     "color": "#e8e8e8",
     "background": "#212121"
   }
