@@ -1,6 +1,7 @@
 var config = require('./config.json')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var WebpackPwaManifest = require('webpack-pwa-manifest')
 var path = require('path')
 var OfflinePlugin = require('offline-plugin')
 
@@ -98,9 +99,15 @@ function generateConfig() {
         'process.env.config': JSON.stringify(config)
       }),
       new HtmlWebpackPlugin({
-        title: 'Code Sher',
+        title: config.title,
         filename: path.resolve(__dirname, './public/index.html'),
         template: path.resolve(__dirname, './src/index.html')
+      }),
+      new WebpackPwaManifest({
+        name: config.title,
+        short_name: config.title,
+        description: config.description,
+        background_color: config.scssVars.background
       }),
       new OfflinePlugin()
     ]
