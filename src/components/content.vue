@@ -13,7 +13,7 @@ div {
 
 @media (min-width: 768px) {
   div {
-    width: 768px;
+    width: 798px;
     margin: 0 auto;
   }
 }
