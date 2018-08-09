@@ -17,6 +17,7 @@ div {
   position: sticky;
   top: 15px;
   text-align: center;
+  width: 100%;
 }
 </style>
 
