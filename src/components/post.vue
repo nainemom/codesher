@@ -84,6 +84,7 @@ export default {
     padding: 20px 15px;
     font-size: 1.2em;
     line-height: 2em;
+    text-align: justify;
   }
   & > .description {
     padding: 15px 0 0 0;
