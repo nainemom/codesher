@@ -19,7 +19,7 @@ export default {
       if (this.user.avatar_url.indexOf("?") > -1) {
         seperator = "&";
       }
-      return this.user.avatar_url + seperator + `s=28`;
+      return this.user.avatar_url + seperator + `s=18`;
     }
   }
 };
