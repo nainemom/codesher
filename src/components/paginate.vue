@@ -37,8 +37,6 @@ h3 {
   background: contrast($background, 1, force-light);
   border: dashed 2px contrast($background, 2);
   margin: 15px 0;
-  position: sticky;
-  bottom: 15px;
   text-align: center;
   width: 100%;
 
