@@ -25,6 +25,7 @@ export default {
 
 header {
   color: $color;
+  text-align: center;
 
   & > .title {
     padding: 25px 15px;
