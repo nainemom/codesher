@@ -8,6 +8,7 @@
     </AppContent>
   </div>
 </template>
+
 <script>
 import { getAll } from "../utils/github.js";
 import AppHeader from "../components/header.vue";
@@ -65,5 +66,3 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-</style>
