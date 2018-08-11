@@ -109,7 +109,7 @@ function generateConfig() {
           use: styleLoader()
         },
         {
-          test: /\.(png|jpg|gif|woff|woff2|eot|ttf|ico|zhtml)/,
+          test: /\.(png|jpg|gif|woff|woff2|eot|ttf|ico|svg)/,
           use: fileLoader()
         }
       ]
