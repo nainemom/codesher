@@ -8,6 +8,8 @@
     "authors",
     "tags"
   ],
+  "port": 1903,
+  "clientId": "34dfc95af9e5991fe192",
   "scssVars": {
     "theme-color": "#da3434",
     "color": "#e8e8e8",
