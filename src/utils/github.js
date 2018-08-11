@@ -1,6 +1,6 @@
 import { getConfig } from './index.js'
 import Octokit from "@octokit/rest";
-
+// TODO: remove octokit and use github api directly
 const octokit = new Octokit();
 
 export async function login({ username, password }) {
