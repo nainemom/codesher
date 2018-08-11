@@ -7,8 +7,8 @@
         <p>{{description}}</p>
       </div>
     </div>
-    <div class="buttons" v-if="false">
-      <a class="button" :href="githubLoginUrl" target="_self">ورود</a>
+    <div class="buttons">
+      <a class="button" href="/oauth/1" target="_self">ورود</a>
     </div>
   </header>
 </template>
@@ -22,14 +22,6 @@ export default {
       title: getConfig().title,
       description: getConfig().description
     };
-  },
-  computed: {
-    githubLoginUrl() {
-      const url = `https://github.com/login/oauth/authorize?client_id=${
-        getConfig().clientId
-      }`;
-      return url;
-    }
   }
 };
 </script>
