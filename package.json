@@ -5,10 +5,12 @@
   "main": "src/index.js",
   "dependencies": {
     "@octokit/rest": "^15.9.5",
+    "fastify": "^1.9.0",
+    "fastify-static": "^0.12.0",
+    "idate": "^0.1.5",
     "markdown": "^0.5.0",
     "vue": "^2.5.17",
-    "vue-router": "^3.0.1",
-    "idate": "^0.1.5"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
