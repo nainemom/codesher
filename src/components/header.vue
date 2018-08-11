@@ -1,8 +1,14 @@
 <template>
   <header>
     <div class="title">
-      <h2><router-link class="app-link" to="/posts" target="_self"> {{title}} </router-link></h2>
-      <p>{{description}}</p>
+      <img class="logo" src="../assets/logo.svg"/>
+      <div class="text">
+        <h2><router-link class="app-link" to="/posts" target="_self"> {{title}} </router-link></h2>
+        <p>{{description}}</p>
+      </div>
+    </div>
+    <div class="buttons" v-if="false">
+      <a class="button" :href="githubLoginUrl" target="_self">ورود</a>
     </div>
   </header>
 </template>
@@ -16,6 +22,14 @@ export default {
       title: getConfig().title,
       description: getConfig().description
     };
+  },
+  computed: {
+    githubLoginUrl() {
+      const url = `https://github.com/login/oauth/authorize?client_id=${
+        getConfig().clientId
+      }`;
+      return url;
+    }
   }
 };
 </script>
@@ -25,30 +39,50 @@ export default {
 
 header {
   color: $color;
-  text-align: center;
+  height: auto;
+  overflow: auto;
+  padding: 25px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 
   & > .title {
-    padding: 25px 15px;
-    display: block;
+    padding: 0 15px;
     height: auto;
     overflow: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-    & > h2 {
-      font-size: 3em;
-      font-weight: bold;
+    & > .text {
+      line-height: 1.5;
+
+      & > h2 {
+        font-size: 3em;
+        font-weight: bold;
+      }
     }
 
-    @media (min-width: 768px) {
-      width: 768px;
-      margin: 0 auto;
+    & > img.logo {
+      width: 120px;
     }
   }
 
-  & > .links {
-    padding: 15px;
-    background: contrast($background, 1, force-light);
-    border-top: solid 1px contrast($background, 2);
-    border-bottom: solid 1px contrast($background, 2);
+  & > .buttons {
+    padding: 0 15px;
+
+    & > .button {
+      font-size: 1.4em;
+      padding: 0 3px;
+      border-bottom: dashed 2px contrast($background, 2);
+      cursor: pointer;
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: 768px;
+    margin: 0 auto;
   }
 }
 </style>
