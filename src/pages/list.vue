@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { getAll } from "../utils/github.js";
 import AppHeader from "../components/header.vue";
 import AppContent from "../components/content.vue";
 import AppPost from "../components/post.vue";
@@ -44,8 +43,8 @@ export default {
     async fetch() {
       this.$loading.start();
       try {
-        const response = await getAll({
-          page: this.$route.query.page || undefined,
+        const response = await this.$store.dispatch("gitGetAll", {
+          page: this.page,
           user: this.$route.query.user || undefined
         });
         this.hasNext = response.hasNext;
@@ -53,6 +52,7 @@ export default {
         this.posts = response.result;
         this.$loading.finish();
       } catch (e) {
+        console.log(e);
         this.hasNext = false;
         this.hasPrev = false;
         this.$loading.finish();

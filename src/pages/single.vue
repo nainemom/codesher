@@ -9,7 +9,6 @@
   </div>
 </template>
 <script>
-import { get, getComments } from "../utils/github.js";
 import AppHeader from "../components/header.vue";
 import AppContent from "../components/content.vue";
 import AppPost from "../components/post.vue";
@@ -38,7 +37,7 @@ export default {
     async fetch() {
       this.$loading.start();
       try {
-        const response = await get({
+        const response = await this.$store.dispatch("gitGet", {
           number: this.$route.params.post
         });
         this.post = response;
@@ -48,9 +47,10 @@ export default {
       }
     },
     async fetchComments() {
+      return;
       this.$loading.start();
       try {
-        const response = await getComments({
+        const response = await this.$store.dispatch("gitGetComments", {
           number: this.$route.params.post
         });
         this.comments = response.result;
