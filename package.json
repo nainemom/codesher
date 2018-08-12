@@ -60,7 +60,8 @@
     "url": "https://github.com/codesher-blog/src/issues"
   },
   "engines": {
-    "node": "8.0.0"
+    "node": "8.11.3",
+    "npm": "5.6.0"
   },
   "homepage": "https://github.com/codesher-blog/src#readme"
 }
