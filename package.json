@@ -2,9 +2,8 @@
   "name": "codesher",
   "version": "0.0.3",
   "description": "codesher blog source",
-  "main": "src/index.js",
+  "main": "index.js",
   "dependencies": {
-    "@octokit/rest": "^15.9.5",
     "axios": "^0.18.0",
     "fastify": "^1.9.0",
     "fastify-cookie": "^2.0.1",
@@ -34,7 +33,6 @@
     "vue-template-compiler": "^2.5.17",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5",
     "webpack-pwa-manifest": "^3.6.3"
   },
   "scripts": {
@@ -42,6 +40,7 @@
     "dev": "webpack --mode=development --watch & nodemon index.js",
     "clean": "rimraf public",
     "publish": "./publish.sh",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
