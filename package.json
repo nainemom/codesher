@@ -39,11 +39,11 @@
     "webpack-pwa-manifest": "^3.6.3"
   },
   "scripts": {
-    "build": "webpack --mode=production",
-    "dev": "webpack --mode=development --watch & nodemon index.js",
-    "clean": "rimraf public",
+    "build": "./node_modules/.bin/webpack --mode=production",
+    "dev": "./node_modules/.bin/webpack --mode=development --watch & ./node_modules/.bin/nodemon index.js",
+    "clean": "./node_modules/.bin/rimraf public",
     "publish": "./publish.sh",
-    "start": "forever index.js",
+    "start": "./node_modules/.bin/forever index.js",
     "postinstall": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
