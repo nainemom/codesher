@@ -10,10 +10,10 @@
 }
 
 @font-face {
-  font-family: 'Tanha';
+  font-family: 'Vazir';
   font-style: normal;
   font-weight: 200;
-  src: local('Tanha'), local('Tanha-Regular'), url("./assets/fonts/Tanha.woff2") format('woff2');
+  src: local('Vazir'), local('Vazir'), url("./assets/fonts/Vazir.woff2") format('woff2');
   unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
 }
 
@@ -23,15 +23,18 @@ html > body {
   text-align: right;
   background: $background;
   color: $color;
-  font-family: 'Tanha';
+  font-family: 'Vazir';
 }
-h1, h2, h3, h4, h5, a {
+h1, h2, h3, h4, h5, .app-link {
   font-family: 'Lalezar';
   font-weight: normal;
 }
-
+input, textarea {
+  font-family: 'Vazir';
+}
 .app-link {
   color: $color;
+  cursor: pointer;
   transition-property: color, text-shadow;
   transition-duration: 0.2s;
 
