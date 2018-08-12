@@ -8,7 +8,7 @@ const gitxios = axios.create({
 module.exports.stepOne = (redirectRoute = '/oauth/2') => {
   return (req, res) => {
     const redirectUrl = encodeURI(req.$serverAddress + redirectRoute)
-    console.log(redirectRoute, 'step one')
+    console.log(redirectUrl, 'step one')
     const url = `https://github.com/login/oauth/authorize?client_id=${
       process.env.CLIENT_ID
       }&scope=${'repo'}&redirect_uri=${redirectUrl}`;
@@ -19,7 +19,7 @@ module.exports.stepOne = (redirectRoute = '/oauth/2') => {
 module.exports.stepTwo = (redirectRoute = '/#') => {
   return async (req, res) => {
     const redirectUrl = encodeURI(`${req.$serverAddress}${redirectRoute}`)
-    console.log(redirectRoute, 'step two')
+    console.log(redirectUrl, 'step two')
     try {
       const { data } = await gitxios.post('https://github.com/login/oauth/access_token', {
         client_id: process.env.CLIENT_ID,
