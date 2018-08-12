@@ -3,9 +3,9 @@
   "perPage": 10,
   "title": "کدشعر",
   "description": "مکانی برای به اشتراک‌گذاری کدشعرهای شما",
-  "repoUrl": "https://github.com/codesher-blog/src",
-  "repoOwner": "codesher-blog",
-  "repoName": "src",
+  "repoUrl": "https://github.com/nainemom/codesher",
+  "repoOwner": "nainemom",
+  "repoName": "codesher",
   "categories": [
     "authors",
     "tags"
