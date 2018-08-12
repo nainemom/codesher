@@ -17,3 +17,20 @@ export function faNumbers(value) {
     return result + char;
   }, "");
 }
+
+export function serialize(obj) {
+  return Object.keys(obj).reduce(function (a, k) { a.push(k + '=' + encodeURIComponent(obj[k])); return a }, []).join('&')
+}
+
+export function deserialize(queryString) {
+  if (queryString.indexOf('?') > -1) {
+    queryString = queryString.split('?')[1];
+  }
+  var pairs = queryString.split('&');
+  var result = {};
+  pairs.forEach(function (pair) {
+    pair = pair.split('=');
+    result[pair[0]] = decodeURIComponent(pair[1] || '');
+  });
+  return result;
+}
