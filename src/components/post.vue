@@ -10,7 +10,10 @@
       <span class="info">
         سروده شده توسط <app-gravatar :user="post.user"></app-gravatar> در تاریخ {{date}}
       </span>
-      <span class="twitter-share-button" @click="tweet"> توئیت </span>
+      <router-link class="app-link btn app-link" :to="'/posts/'+post.number" target="_self">
+        لینک مستقیم
+      </router-link>
+      <a class="twitter-share-button btn app-link" @click="tweet"> توئیت </a>
     </div>
   </div>
 </template>
@@ -75,6 +78,9 @@ export default {
   & > .title {
     line-height: 3em;
     padding: 15px;
+    position: sticky;
+    background: rgba(contrast($background, 1, force-light), 0.3);
+    top: 0;
 
     & > h2 {
       font-size: 2.5em;
@@ -87,19 +93,24 @@ export default {
     text-align: justify;
   }
   & > .description {
-    padding: 15px 0 0 0;
+    margin: 15px 0 0 0;
+    padding: 5px 15px;
     height: auto;
     overflow: auto;
     font-size: 0.9em;
+    border-top: solid 1px contrast($background, 2);
 
     & > .info {
       float: right;
     }
+    & > .btn {
+      float: left;
+      cursor: pointer;
+      margin-right: 5px;
+    }
 
     & > .twitter-share-button {
       color: #1da1f2;
-      float: left;
-      cursor: pointer;
     }
   }
 }

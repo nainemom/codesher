@@ -1,5 +1,5 @@
 <template>
-  <h3 v-if="!!prev || !!next">
+  <h3 class="paginate" v-if="!!prev || !!next">
     <router-link v-if="!!prev" class="app-link" :to="prev" target="_self"> صفحه قبلی </router-link>
     <span> {{faPage}} </span>
     <router-link v-if="!!next" class="app-link" :to="next" target="_self"> صفحه بعدی </router-link>
@@ -32,7 +32,7 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/functions";
 
-h3 {
+.paginate {
   padding: 15px;
   background: contrast($background, 1, force-light);
   border: dashed 2px contrast($background, 2);

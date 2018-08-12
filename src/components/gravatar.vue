@@ -30,7 +30,6 @@ export default {
 
 .user {
   padding: 5px 0;
-  display: inline-block;
 
   & > img {
     margin-left: 2px;
