@@ -42,8 +42,8 @@ fastify.get('/oauth/2', async (request, reply) => {
 
 })
 
-
-fastify.listen(process.env.PORT || 1903, (err, address) => {
+console.log(process.env.port, typeof process.env.port)
+fastify.listen(process.env.port || 1903, (err, address) => {
     if (err) throw err
     fastify.log.info(`server listening on ${address}`)
     serverAddress = address
