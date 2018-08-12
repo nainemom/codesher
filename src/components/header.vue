@@ -8,7 +8,8 @@
       </div>
     </div>
     <div class="buttons">
-      <a class="button" href="/oauth/1" target="_self">ورود</a>
+      <a class="button app-link" href="/oauth/1" target="_self" v-if="!$store.state.accessToken">ورود</a>
+      <a class="button app-link" target="_self" v-else @click="$store.dispatch('clearAccessToken')">خروج</a>
     </div>
   </header>
 </template>
@@ -66,8 +67,7 @@ header {
 
     & > .button {
       font-size: 1.4em;
-      padding: 0 3px;
-      border-bottom: dashed 2px contrast($background, 2);
+      margin-right: 3px;
       cursor: pointer;
     }
   }
