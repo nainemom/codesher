@@ -1,5 +1,5 @@
 <template>
-  <form class="new-post" ref="form" @submit.prevent="sendPost">
+  <form class="new-post" ref="form" @submit.prevent="sendPost" tabindex="0">
     <input v-model="title" placeholder="عنوان رو بنویس" required/>
     <textarea v-model="body" placeholder="متن کدشعرت رو بنویس. مارک‌داون هم قبوله." required></textarea>
     <div class="buttons">
@@ -31,11 +31,10 @@ export default {
         this.title = this.body = "";
         this.sending = false;
         alert(
-          "پست شما با موفقیت ارسال شد و به ان‌شاالله که به زودی تأیید و نمایش داد خواهد شد."
+          "پست شما با موفقیت ارسال شد و ان‌شاالله که به زودی تأیید و نمایش داده خواهد شد."
         );
       } catch (e) {
         this.sending = false;
-        console.log(e);
       }
     }
   }
@@ -68,8 +67,10 @@ export default {
 
   & > textarea {
     resize: none;
+  }
 
-    &:focus {
+  &:focus-within {
+    & > textarea {
       height: 6.7em;
     }
   }
