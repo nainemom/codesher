@@ -1,22 +1,25 @@
 import { getConfig } from './index.js'
-import Octokit from "@octokit/rest";
-// TODO: remove octokit and use github api directly
-const octokit = new Octokit();
+import axios from "axios";
 
-export async function login({ username, password }) {
-  const config = {
-    type: 'basic',
-    username,
-    password
+const gitxios = axios.create({
+  baseURL: 'https://api.github.com/repos/codesher-blog/src',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: undefined
   }
-  const response = await octokit.authenticate(config)
-  return response
+})
+
+function hasNextPage(response) {
+  return response.headers.link && response.headers.link.indexOf('next') > -1
+}
+
+export function login({ token_type, access_token }) {
+  gitxios.defaults.headers.Authorization = `${token_type} ${access_token}`
+  return true
 }
 
 export async function getAll({ user, page }) {
   const config = {
-    owner: "codesher-blog",
-    repo: "src",
     labels: "codesher",
     per_page: getConfig().perPage,
   }
@@ -26,36 +29,31 @@ export async function getAll({ user, page }) {
   if (user) {
     config.creator = user
   }
-  const response = await octokit.issues.getForRepo(config  /*, milestone, state, assignee, creator, mentioned, labels, sort, direction, since, per_page, page*/)
+
+  const response = await gitxios.get(`issues`, config)
+
   return {
     result: response.data,
-    hasNext: octokit.hasNextPage(response) ? true : false,
+    hasNext: hasNextPage(response),
     hasPrev: page > 1
   }
 }
 
 export async function getComments({ number }) {
-  const page = 1
   const config = {
-    owner: "codesher-blog",
-    repo: "src",
-    per_page: 100,
-    page,
-    number
+    per_page: 999,
   }
-  const response = await octokit.issues.getComments(config)
+  const response = await gitxios.get(`issues/${number}/comments`, config)
+
   return {
     result: response.data,
-    hasNext: octokit.hasNextPage(response) ? true : false,
+    hasNext: hasNextPage(response),
     hasPrev: page > 1
   }
 }
 
 export async function get({ number }) {
-  const response = await octokit.issues.get({
-    owner: "codesher-blog",
-    repo: "src",
-    number
-  })
+  const response = await gitxios.get(`issues/${number}`)
+
   return response.data
 }
