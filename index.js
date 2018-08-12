@@ -22,7 +22,7 @@ fastify.register(fastifyCookie, (err) => {
 fastify.get('/oauth/1', (request, reply) => {
     const url = `https://github.com/login/oauth/authorize?client_id=${
         process.env.CLIENT_ID
-        }&redirect_uri=${serverAddress}/oauth/2`;
+        }&scope=${'repo'}&redirect_uri=${serverAddress}/oauth/2`;
     reply.redirect(url)
 })
 
