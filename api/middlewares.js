@@ -4,7 +4,8 @@ const cookieParser = require('cookie-parser')
 
 const serverAddress = () => {
   return (req, res, next) => {
-    req.$serverAddress = `${req.protocol}://${req.get('host')}`
+    const protocol = (req.connection || {}).encrypted ? 'https' : 'http'
+    req.$serverAddress = `${protocol}://${req.get('host')}`
     next()
   }
 }
