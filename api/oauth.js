@@ -9,14 +9,14 @@ module.exports.stepOne = (redirectRoute = '/oauth/2') => {
   return (req, res) => {
     const url = `https://github.com/login/oauth/authorize?client_id=${
       process.env.CLIENT_ID
-      }&scope=${'repo'}&redirect_uri=${req.$serverAddress}${redirectRoute}`;
+      }&scope=${'repo'}&redirect_uri=${encodeURI(req.$serverAddress + redirectRoute)}`;
     res.redirect(url)
   }
 }
 
 module.exports.stepTwo = (redirectRoute = '/#') => {
   return async (req, res) => {
-    const redirectUrl = `${req.$serverAddress}${redirectRoute}`
+    const redirectUrl = encodeURI(`${req.$serverAddress}${redirectRoute}`)
     try {
       const { data } = await gitxios.post('https://github.com/login/oauth/access_token', {
         client_id: process.env.CLIENT_ID,
