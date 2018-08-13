@@ -11,7 +11,7 @@ module.exports.stepOne = (redirectRoute = '/oauth/2') => {
     console.log(redirectUrl, 'step one')
     const url = `https://github.com/login/oauth/authorize?client_id=${
       process.env.CLIENT_ID
-      }&scope=${'repo'}&redirect_uri=${redirectUrl}`;
+      }&scope=${'public_repo'}&redirect_uri=${redirectUrl}`;
     res.redirect(url)
   }
 }
