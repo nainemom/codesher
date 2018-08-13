@@ -45,9 +45,9 @@ export default {
       if (content.length > 100) {
         content = content.substr(0, 97) + "...";
       }
-      const link = `http://${document.location.host}/%23/posts/${
-        this.post.number
-      }`;
+      const link = `${document.location.protocol}//${
+        document.location.host
+      }/%23/posts/${this.post.number}`;
       return `text=${encodeURI(content)}&url=${link}&hashtags=${encodeURI(
         "کدشعر"
       )}`;
