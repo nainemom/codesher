@@ -76,6 +76,11 @@ header {
     width: 768px;
     margin: 0 auto;
   }
+  @media (max-width: 767px) {
+    & > .title > .text > p {
+      display: none;
+    }
+  }
 }
 </style>
 
