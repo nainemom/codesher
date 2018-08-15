@@ -2,7 +2,6 @@
   <div>
     <AppHeader></AppHeader>
     <AppContent>
-      <AppNewPost></AppNewPost>
       <AppPost v-if="post.user" :post="post" :comments="comments"></AppPost>
       <AppComment v-for="comment in comments" :key="'comment' + comment.id" :comment="comment"></AppComment>
     </AppContent>
@@ -13,15 +12,13 @@ import AppHeader from "../components/header.vue";
 import AppContent from "../components/content.vue";
 import AppPost from "../components/post.vue";
 import AppComment from "../components/comment.vue";
-import AppNewPost from "../components/new-post.vue";
 
 export default {
   components: {
     AppHeader,
     AppContent,
     AppPost,
-    AppComment,
-    AppNewPost
+    AppComment
   },
   data() {
     return {
