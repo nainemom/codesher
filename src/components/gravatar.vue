@@ -29,24 +29,16 @@ export default {
 @import "../styles/functions";
 
 .user {
-  padding: 5px 0;
-
   & > img {
     margin-left: 2px;
     border-radius: 14px;
     overflow: hidden;
     vertical-align: middle;
-    transition: transform 0.7s;
+    // transition: transform 0.7s;
   }
 
   & > span {
     font-weight: bold;
-  }
-
-  &:hover {
-    & > img {
-      transform: rotate(360deg);
-    }
   }
 }
 </style>
