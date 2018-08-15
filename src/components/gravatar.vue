@@ -34,6 +34,8 @@ export default {
     border-radius: 14px;
     overflow: hidden;
     vertical-align: middle;
+    max-width: 18px;
+    max-height: 18px;
     // transition: transform 0.7s;
   }
 
