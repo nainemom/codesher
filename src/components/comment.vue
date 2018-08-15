@@ -12,7 +12,6 @@
 <script>
 import AppGravatar from "./gravatar.vue";
 import { markdown } from "markdown";
-import IDate from "idate";
 
 export default {
   components: {
@@ -32,8 +31,7 @@ export default {
         .replace(/\n/g, "<br />");
     },
     date() {
-      const date = new IDate(this.comment.created_at || new Date());
-      return date.toString(true);
+      return ''
     }
   }
 };
