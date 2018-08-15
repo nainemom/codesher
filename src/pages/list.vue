@@ -2,7 +2,7 @@
   <div>
     <AppHeader></AppHeader>
     <AppContent>
-      <AppNewPost></AppNewPost>
+      <AppNewPost @sent="fetch"></AppNewPost>
       <AppPost v-for="post in posts" :key="'post' + post.id" :post="post"></AppPost>
       <AppPaginate :prev="hasPrev ? {query: {page: page - 1}} : false" :next="hasNext ? {query: {page: page + 1}} : false" :page="page"></AppPaginate>
     </AppContent>
@@ -40,7 +40,14 @@ export default {
     await this.fetch();
   },
   methods: {
-    async fetch() {
+    async fetch(forceOne = false) {
+      if (forceOne) {
+        this.$router.push({
+          query: Object.assign(this.$route.query, {
+            page: 1
+          })
+        })
+      }
       this.$loading.start();
       try {
         const response = await this.$store.dispatch("gitGetAll", {
@@ -52,7 +59,6 @@ export default {
         this.posts = response.result;
         this.$loading.finish();
       } catch (e) {
-        console.log(e);
         this.hasNext = false;
         this.hasPrev = false;
         this.$loading.finish();
