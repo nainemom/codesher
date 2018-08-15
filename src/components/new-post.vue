@@ -30,9 +30,7 @@ export default {
         });
         this.title = this.body = "";
         this.sending = false;
-        alert(
-          "پست شما با موفقیت ارسال شد و ان‌شاالله که به زودی تأیید و نمایش داده خواهد شد."
-        );
+        this.$emit('sent');
       } catch (e) {
         this.sending = false;
       }
@@ -85,18 +83,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-
-    & > * {
-      border: none;
-      background: transparent;
-      font-size: 1em;
-      padding: 0;
-
-      &:disabled {
-        color: gray;
-        cursor: not-allowed;
-      }
-    }
   }
 }
 </style>
