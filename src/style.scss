@@ -32,14 +32,27 @@ h1, h2, h3, h4, h5, .app-link {
 input, textarea {
   font-family: 'Vazir';
 }
+button {
+  border: none;
+  background: transparent;
+  font-size: 1em;
+  padding: 0;
+
+  &:disabled {
+    color: gray;
+    cursor: not-allowed;
+  }
+}
 .app-link {
   color: $color;
   cursor: pointer;
   transition-property: color, text-shadow;
   transition-duration: 0.2s;
 
-  &:hover,
-  &.hover {
-    color: $theme-color;
+  &:not([disabled]) {
+    &:hover,
+    &.hover {
+      color: $theme-color;
+    }
   }
 }
