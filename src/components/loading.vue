@@ -18,6 +18,7 @@ export default {
         this.$mount();
         document.body.appendChild(this.$el);
       }
+      window.scrollTo(0, 0)
       this.loading = true;
     },
     finish() {
