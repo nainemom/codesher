@@ -10,7 +10,8 @@ export const state = () => {
       baseURL: 'https://api.github.com',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: undefined
+        Authorization: undefined,
+        Accept: 'application/vnd.github.squirrel-girl-preview'
       }
     })
   }
@@ -53,7 +54,8 @@ export const actions = {
       per_page: getConfig().perPage,
       page: page || 1,
       state: 'all',
-      labels: 'codesher'
+      // labels: 'codesher',
+      sort: 'updated'
     }
     if (user) {
       config.creator = user
@@ -70,6 +72,12 @@ export const actions = {
   },
   async gitGet({ state }, { number }) {
     const response = await state.gitxios.get(`repos/${getConfig().repoOwner}/${getConfig().repoName}/issues/${number}`)
+    return response.data
+  },
+  async gitAddHeart({ state }, { number }) {
+    const response = await state.gitxios.post(`repos/${getConfig().repoOwner}/${getConfig().repoName}/issues/${number}/reactions`, {
+      content: 'heart'
+    })
     return response.data
   },
   async gitGetComments({ state }, { number }) {
