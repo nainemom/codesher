@@ -8,12 +8,17 @@
     <p class="body" v-html="body"></p>
     <div class="description">
       <span class="info">
-        سروده شده توسط <app-gravatar :user="post.user"></app-gravatar> در تاریخ {{date}}
+        <app-gravatar :user="post.user"></app-gravatar>
+        <span class="seperator"></span>
+        <span class="date"> {{date}} </span>
+        <span class="seperator"></span>
+        <span class="hearts"> {{hearts}} </span>
       </span>
-      <router-link class="app-link btn app-link" :to="'/posts/'+post.number" target="_self">
-        لینک مستقیم
-      </router-link>
-      <a class="twitter-share-button btn app-link" @click="tweet"> توئیت </a>
+      <span class="action">
+        <button class="btn app-link" @click="addHeart" :disabled="!$store.state.accessToken"> خوشم اومد! </button>
+        <span class="seperator"></span>
+        <a class="twitter-share-button btn app-link" @click="tweet"> توئیت </a>
+      </span>
     </div>
   </div>
 </template>
@@ -21,7 +26,8 @@
 <script>
 import AppGravatar from "./gravatar.vue";
 import { markdown } from "markdown";
-import IDate from "idate";
+import timeago from "timeago.js";
+import timeagoFa from 'timeago.js/locales/fa.js'
 
 export default {
   components: {
@@ -33,12 +39,26 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      localHearts: 0
+    }
+  },
   computed: {
     body() {
       return markdown
         .toHTML(this.post.body || "")
         .toString()
         .replace(/\n/g, "<br />");
+    },
+    hearts () {
+      const cnt = ((this.post.reactions || {}).heart || 0) + this.localHearts
+      if (cnt === 0) {
+        return 'هیشکی دوستش نداشت'
+      } else if (cnt === 1) {
+        return '1 نفر خوشش اومد'
+      }
+      return `${cnt} نفر دوستش داشتن`
     },
     shareContent() {
       let content = this.post.body || "";
@@ -53,14 +73,24 @@ export default {
       )}`;
     },
     date() {
-      const date = new IDate(this.post.created_at || new Date());
-      return date.toString(true);
+      timeago.register('fa', timeagoFa);
+      return timeago(null, 'fa').format(this.post.created_at || new Date())
     }
   },
   methods: {
     tweet() {
       const url = "https://twitter.com/intent/tweet?" + this.shareContent;
       window.open(url, "_blank", "width=480,height=290");
+    },
+    async addHeart() {
+      try {
+        await this.$store.dispatch('gitAddHeart', {
+          number: this.post.number
+        })
+        this.localHearts++
+      } catch (e) {
+        // nothing
+      }
     }
   }
 };
@@ -97,20 +127,42 @@ export default {
     padding: 5px 15px;
     height: auto;
     overflow: auto;
-    font-size: 0.9em;
+    font-size: 1em;
     border-top: solid 1px contrast($background, 2);
 
     & > .info {
       float: right;
-    }
-    & > .btn {
-      float: left;
-      cursor: pointer;
-      margin-right: 5px;
+
+      & > * {
+        display: inline-block;
+      }
     }
 
-    & > .twitter-share-button {
-      color: #1da1f2;
+    & > .action {
+      float: left;
+
+      & > * {
+        display: inline-block;
+      }
+
+      & > .btn {
+        cursor: pointer;
+      }
+
+      & > .twitter-share-button {
+        color: #1da1f2;
+      }
+    }
+
+    & > .info,
+    & > .action, {
+      & > .seperator {
+        height: 5px;
+        margin: 0 7px;
+        width: 5px;
+        background: contrast($background, 2);
+        border-radius: 5px;
+      }
     }
   }
 }
